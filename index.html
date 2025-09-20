@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODUKGAASTORE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a2463, #1565c0, #64b5f6);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            transform: perspective(800px) rotateX(10deg);
+            transition: transform 0.5s;
+        }
+        
+        header:hover {
+            transform: perspective(800px) rotateX(0deg);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #82b1ff, #e3f2fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+        
+        .product-card {
+            background: linear-gradient(145deg, #0d47a1, #1976d2);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transform-style: preserve-3d;
+            transition: transform 0.4s, box-shadow 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom right, rgba(255,255,255,0.2), rgba(255,255,255,0));
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px) rotateY(5deg) rotateX(5deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        .product-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #bbdefb;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #e3f2fd;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .product-features {
+            list-style-type: none;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .product-features li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+        
+        .product-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .product-features li i {
+            margin-right: 10px;
+            color: #82b1ff;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px 0 40px;
+        }
+        
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-whatsapp {
+            background: linear-gradient(to right, #25D366, #128C7E);
+            color: white;
+        }
+        
+        .btn-channel {
+            background: linear-gradient(to right, #2962ff, #82b1ff);
+            color: white;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::after {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .note {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1rem;
+            opacity: 0.8;
+            max-width: 600px;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .product-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .buttons {
+                width: 100%;
+            }
+        }
+        
+        /* Efek 3D untuk latar belakang */
+        .bg-3d-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(33, 150, 243, 0.7) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(3, 169, 244, 0.7) 0%, transparent 40%);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-3d-effect"></div>
+    
+    <div class="container">
+        <header>
+            <h1>PRODUKGAASTORE</h1>
+            <p class="subtitle">Tempat terbaik untuk pembelian item game dan top up</p>
+        </header>
+        
+        <div class="product-list">
+            <div class="product-card">
+                <h3 class="product-title">SC Nika</h3>
+                <div class="product-price">35k No Up</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-arrow-circle-up"></i> 40k 1× up</li>
+                    <li><i class="fas fa-crown"></i> 50k Free up Selama nya</li>
+                </ul>
+            </div>
+            
+            <div class="product-card">
+                <h3 class="product-title">Panel</h3>
+                <div class="product-price">1gb-unli harga pm je</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-server"></i> Kualitas terjamin</li>
+                    <li><i class="fas fa-bolt"></i> Kecepatan maksimal</li>
+                </ul>
+            </div>
+            
+            <div class="product-card">
+                <h3 class="product-title">Reseller Nika</h3>
+                <div class="product-price">90k</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-user-tie"></i> Keuntungan maksimal</li>
+                    <li><i class="fas fa-gem"></i> Harga khusus reseller</li>
+                </ul>
+            </div>
+            
+            <div class="product-card">
+                <h3 class="product-title">SC Ambcrashh</h3>
+                <div class="product-price">15k no up</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-arrow-circle-up"></i> Free up 1× 25k</li>
+                    <li><i class="fas fa-infinity"></i> Free up Permanent 40k</li>
+                </ul>
+            </div>
+            
+            <div class="product-card">
+                <h3 class="product-title">Akun FF/ML</h3>
+                <div class="product-price">Harga bervariasi</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-gamepad"></i> Akun berkualitas</li>
+                    <li><i class="fas fa-shield-alt"></i> Terjamin keamanannya</li>
+                </ul>
+            </div>
+            
+            <div class="product-card">
+                <h3 class="product-title">Top Up All Game</h3>
+                <div class="product-price">List ke pm</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-tags"></i> Harga kompetitif</li>
+                    <li><i class="fas fa-rocket"></i> Proses cepat</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <a href="https://wa.me/+6285189456164" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Hubungi WhatsApp
+            </a>
+            
+            <a href="https://whatsapp.com/channel/0029VbAv2Ev1XquaNYbHmi0h" class="btn btn-channel">
+                <i class="fab fa-whatsapp"></i> Ikuti Saluran WhatsApp
+            </a>
+        </div>
+        
+        <div class="note">
+            <p>Kami juga melayani: JP/Need, Rekber/Mc, dan berbagai metode pembayaran lainnya.</p>
+            <p>Jangan ragu untuk bertanya tentang produk yang tidak tercantum dalam list!</p>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2023 PRODUKGAASTORE. All rights reserved.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Efek paralaks sederhana untuk latar belakang
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) / 25;
+            const moveY = (e.clientY - window.innerHeight / 2) / 25;
+            
+            document.querySelector('.bg-3d-effect').style.transform = 
+                `translateX(${moveX}px) translateY(${moveY}px)`;
+        });
+        
+        // Animasi untuk card product saat di-scroll
+        const productCards = document.querySelectorAll('.product-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transform = 'translateY(0) rotateY(0) rotateX(0)';
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        productCards.forEach(card => {
+            card.style.transform = 'translateY(50px) rotateY(20deg) rotateX(-10deg)';
+            card.style.opacity = '0';
+            card.style.transition = 'transform 0.7s, opacity 0.7s, box-shadow 0.4s';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
